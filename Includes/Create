@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact Thumbnail Generator</title>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .background-selector {
+            margin: 20px 0;
+        }
+        .thumbnail-container {
+            position: relative;
+            width: 800px;
+            height: 450px;
+            margin: 20px auto;
+            border: 2px solid #555;
+        }
+        .thumbnail-background {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .search-bar {
+            margin: 20px;
+        }
+        .characters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .character {
+            width: 150px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Genshin Impact Thumbnail Generator</h1>
+    <div class="background-selector">
+        <button onclick="selectBackground('spiral')">Spiral Abyss</button>
+        <button onclick="selectBackground('theater')">Theater</button>
+    </div>
+    <div class="thumbnail-container">
+        <img id="thumbnail-background" class="thumbnail-background" src="" alt="Thumbnail Background">
+    </div>
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for a character..." onkeyup="searchCharacter()">
+    </div>
+    <div class="characters" id="characters">
+        <!-- Character splash arts will be dynamically loaded here -->
+    </div>
+
+    <script>
+        const backgrounds = {
+            spiral: 'path_to_spiral_abyss_image.jpg',
+            theater: 'path_to_theater_image.jpg'
+        };
+
+        function selectBackground(background) {
+            document.getElementById('thumbnail-background').src = backgrounds[background];
+        }
+
+        function searchCharacter() {
+            const query = document.getElementById('search').value.toLowerCase();
+            // Add logic to filter and display character splash arts based on the search query
+        }
+
+        function loadCharacters() {
+            const characters = [
+                // Populate this array with character names and splash art paths
+                { name: 'Aether', image: 'path_to_aether_splash_art.jpg' },
+                { name: 'Lumine', image: 'path_to_lumine_splash_art.jpg' }
+                // Add more characters as needed
+            ];
+
+            const container = document.getElementById('characters');
+            characters.forEach(character => {
+                const img = document.createElement('img');
+                img.src = character.image;
+                img.alt = character.name;
+                img.className = 'character';
+                img.onclick = () => addCharacterToThumbnail(character.image);
+                container.appendChild(img);
+            });
+        }
+
+        function addCharacterToThumbnail(image) {
+            const container = document.querySelector('.thumbnail-container');
+            const img = document.createElement('img');
+            img.src = image;
+            img.className = 'thumbnail-background'; // Adjust class name as needed
+            container.appendChild(img);
+        }
+
+        // Load characters when the page is ready
+        window.onload = loadCharacters;
+    </script>
+</body>
+</html>
